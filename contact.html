@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Contact</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Mono:wght@300;400;500&display=swap">
+    <style>
+        body {
+            font-family: 'IBM Mono', monospace;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #000;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 0.5em;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 1em;
+            margin: 0 0.5em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        section {
+            max-width: 90%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #000;
+        }
+
+        p {
+            line-height: 1.6;
+            color: #444;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="projects.html">Projects</a>
+    </nav>
+
+    <section>
+        <h2>Contact</h2>
+        <p>Feel free to reach out to me using the form below or through other contact information.</p>
+
+        <form action="#" method="post">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Your Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>Contact: your.email@example.com | Follow me on Twitter: @yourtwitterhandle</p>
+    </footer>
+
+</body>
+
+</html>
