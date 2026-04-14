@@ -286,6 +286,88 @@
             font-size: 0.95rem;
         }
 
+        .calculator {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #fcfdff;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.7rem;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .field label {
+            font-size: 0.85rem;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .field input {
+            width: 100%;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.55rem 0.65rem;
+            font-size: 0.95rem;
+            background: #fff;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.7rem;
+            margin-top: 0.9rem;
+        }
+
+        .result-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #fff;
+            padding: 0.9rem;
+        }
+
+        .result-card .label {
+            display: block;
+            color: var(--muted);
+            font-size: 0.86rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .result-card strong {
+            font-size: 1.2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .result-highlight {
+            margin-top: 0.8rem;
+            border-radius: 12px;
+            padding: 0.8rem 0.95rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            background: #ffffff;
+        }
+
+        .positive {
+            color: #0f6c3f;
+            background: #edfdf4;
+            border-color: #bde8cd;
+        }
+
+        .negative {
+            color: #8f1f1f;
+            background: #fff1f1;
+            border-color: #f0c8c8;
+        }
+
         footer {
             margin: 0.8rem 0 2rem;
             text-align: center;
@@ -309,7 +391,9 @@
 
             .grid-3,
             .grid-2,
-            .langs {
+            .langs,
+            .form-grid,
+            .result-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -323,6 +407,7 @@
             <nav>
                 <a href="#problem">Проблема</a>
                 <a href="#solution">Решение</a>
+                <a href="#calculator">Калькулятор</a>
                 <a href="#cases">Кейсы</a>
                 <a href="#contact">Контакты</a>
             </nav>
@@ -435,6 +520,67 @@
             </div>
         </section>
 
+        <section id="calculator" class="section">
+            <h2>Калькулятор экономии на синхронистах</h2>
+            <p class="lead">
+                Расчет повторяет модель из файла <code>costs.xlsx</code> и показывает разницу между классическим
+                синхронным переводом и AI.
+            </p>
+            <div class="calculator">
+                <div class="form-grid">
+                    <div class="field">
+                        <label for="days">Количество дней</label>
+                        <input id="days" type="number" min="1" step="1" value="3">
+                    </div>
+                    <div class="field">
+                        <label for="halls">Количество залов</label>
+                        <input id="halls" type="number" min="1" step="1" value="13">
+                    </div>
+                    <div class="field">
+                        <label for="hours">Часов в день</label>
+                        <input id="hours" type="number" min="1" step="1" value="5">
+                    </div>
+                    <div class="field">
+                        <label for="pairCoef">Коэффициент на пару</label>
+                        <input id="pairCoef" type="number" min="1" step="1" value="2">
+                    </div>
+                    <div class="field">
+                        <label for="costEnRu">Стоимость часа англ↔рус (₽)</label>
+                        <input id="costEnRu" type="number" min="0" step="100" value="7000">
+                    </div>
+                    <div class="field">
+                        <label for="costRuZh">Стоимость часа рус↔кит (₽)</label>
+                        <input id="costRuZh" type="number" min="0" step="100" value="12000">
+                    </div>
+                    <div class="field">
+                        <label for="equipmentRent">Аренда оборудования / зал в день (₽)</label>
+                        <input id="equipmentRent" type="number" min="0" step="1000" value="30000">
+                    </div>
+                    <div class="field">
+                        <label for="aiRate">AI-тариф / зал в день (₽)</label>
+                        <input id="aiRate" type="number" min="0" step="1000" value="220000">
+                    </div>
+                </div>
+
+                <div class="result-grid">
+                    <div class="result-card">
+                        <span class="label">Синхронисты + оборудование</span>
+                        <strong id="syncTotal">0 ₽</strong>
+                    </div>
+                    <div class="result-card">
+                        <span class="label">AI-перевод</span>
+                        <strong id="aiTotal">0 ₽</strong>
+                    </div>
+                    <div class="result-card">
+                        <span class="label">Разница</span>
+                        <strong id="savingTotal">0 ₽</strong>
+                    </div>
+                </div>
+
+                <div id="savingHint" class="result-highlight"></div>
+            </div>
+        </section>
+
         <section id="how" class="section">
             <h2>Как это работает для гостя</h2>
             <div class="grid-3">
@@ -502,15 +648,79 @@
                 и требуемые языки.
             </p>
             <div class="cta-row">
-                <a class="btn btn-primary" href="mailto:pgchernikova@sberbank.ru">Отправить запрос на расчет</a>
-                <a class="btn btn-secondary" href="tel:+79651227031">Позвонить: +7 (965) 122-70-31</a>
+                <a class="btn btn-primary" href="#calculator">Рассчитать стоимость сейчас</a>
             </div>
         </section>
     </main>
 
     <footer class="container">
-        <p>Контакт: Полина Черникова, руководитель проекта — <a href="mailto:pgchernikova@sberbank.ru">pgchernikova@sberbank.ru</a></p>
+        <p>AI-перевод для международных мероприятий</p>
     </footer>
+
+    <script>
+        (function () {
+            var ids = [
+                "days",
+                "halls",
+                "hours",
+                "pairCoef",
+                "costEnRu",
+                "costRuZh",
+                "equipmentRent",
+                "aiRate"
+            ];
+
+            function val(id) {
+                var x = parseFloat(document.getElementById(id).value);
+                return Number.isFinite(x) ? Math.max(x, 0) : 0;
+            }
+
+            function rub(value) {
+                return new Intl.NumberFormat("ru-RU", {
+                    style: "currency",
+                    currency: "RUB",
+                    maximumFractionDigits: 0
+                }).format(value);
+            }
+
+            function recalc() {
+                var days = val("days");
+                var halls = val("halls");
+                var hours = val("hours");
+                var pairCoef = val("pairCoef");
+                var costEnRu = val("costEnRu");
+                var costRuZh = val("costRuZh");
+                var equipmentRent = val("equipmentRent");
+                var aiRate = val("aiRate");
+
+                var syncHonor = days * halls * pairCoef * hours * (costEnRu + costRuZh);
+                var syncEquipment = days * halls * equipmentRent;
+                var syncTotal = syncHonor + syncEquipment;
+                var aiTotal = days * halls * aiRate;
+                var saving = syncTotal - aiTotal;
+                var savingPct = syncTotal > 0 ? (saving / syncTotal) * 100 : 0;
+
+                document.getElementById("syncTotal").textContent = rub(syncTotal);
+                document.getElementById("aiTotal").textContent = rub(aiTotal);
+                document.getElementById("savingTotal").textContent = rub(saving);
+
+                var hint = document.getElementById("savingHint");
+                if (saving >= 0) {
+                    hint.className = "result-highlight positive";
+                    hint.textContent = "Экономия при выборе AI: " + savingPct.toFixed(1) + "%";
+                } else {
+                    hint.className = "result-highlight negative";
+                    hint.textContent = "При текущих параметрах AI дороже на " + Math.abs(savingPct).toFixed(1) + "%";
+                }
+            }
+
+            ids.forEach(function (id) {
+                document.getElementById(id).addEventListener("input", recalc);
+            });
+
+            recalc();
+        })();
+    </script>
 </body>
 
 </html>
