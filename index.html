@@ -6,101 +6,171 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anton Polevoi - Portfolio</title>
     <style>
+        :root {
+            --bg: #f4f8ff;
+            --text: #111827;
+            --muted: #5f6b7a;
+            --card: #ffffff;
+            --border: #dbe4ff;
+            --accent: #5b7cff;
+            --accent-soft: #edf1ff;
+            --radius: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'IBM Mono', monospace;
+            font-family: "Inter", "Segoe UI", sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #fff;
-            color: #000;
+            background: radial-gradient(circle at top right, #e8eeff 0%, var(--bg) 42%, #f8fbff 100%);
+            color: var(--text);
             line-height: 1.6;
         }
 
-        header,
-        footer {
-            background-color: #000;
-            color: #fff;
-            text-align: center;
-            padding: 1em;
+        .container {
+            width: min(980px, calc(100% - 2rem));
+            margin: 0 auto;
         }
 
-        header img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #fff;
-            margin: 1em 0;
+        header {
+            padding: 3.5rem 0 1.5rem;
+        }
+
+        .hero {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: 0 16px 40px rgba(33, 60, 133, 0.08);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            line-height: 1.15;
+            letter-spacing: -0.03em;
+        }
+
+        .subtitle {
+            margin: 0.7rem 0 0;
+            color: var(--muted);
+            font-size: 1.05rem;
         }
 
         nav {
-            background-color: #000;
-            text-align: center;
-            padding: 0.5em;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            backdrop-filter: blur(8px);
+            background: rgba(244, 248, 255, 0.72);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            display: flex;
+            gap: 0.6rem;
+            justify-content: center;
+            padding: 0.75rem 0;
         }
 
         nav a {
-            color: #fff;
+            color: var(--text);
             text-decoration: none;
-            padding: 0.5em 1em;
-            margin: 0 0.5em;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            padding: 0.5rem 0.95rem;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            font-weight: 600;
         }
 
         nav a:hover {
-            background-color: #777676;
+            background: var(--accent-soft);
+            border-color: var(--border);
         }
 
-        .container {
-            max-width: 800px;
-            margin: 2em auto;
-            padding: 1em;
+        main {
+            padding: 2rem 0 3rem;
         }
 
         .section {
-            margin-bottom: 2em;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 12px 28px rgba(33, 60, 133, 0.06);
         }
 
-        h1, h2 {
-            margin-bottom: 0.5em;
+        h2 {
+            margin-top: 0;
+            margin-bottom: 0.7rem;
+            letter-spacing: -0.02em;
+        }
+
+        .project-list {
+            display: grid;
+            gap: 0.9rem;
         }
 
         .project {
-            margin-bottom: 1.5em;
+            border: 1px solid var(--border);
+            background: #fcfdff;
+            border-radius: 12px;
+            padding: 1rem 1.1rem;
         }
 
-        .project img {
-            max-width: 100%;
-            border-radius: 5px;
-            margin-top: 0.5em;
+        .project h3 {
+            margin: 0 0 0.4rem;
+            font-size: 1.05rem;
         }
 
-        footer {
-            font-size: 0.9em;
+        .project p {
+            margin: 0;
+            color: var(--muted);
         }
 
-        footer a {
-            color: #fff;
+        .project a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .project a:hover {
             text-decoration: underline;
         }
 
+        footer {
+            padding: 1.5rem 0 2rem;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
         footer a:hover {
-            color: #777676;
+            text-decoration: underline;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <img src="src_img/my_photo.jpg" alt="Anton Polevoi">
-        <h1>Anton Polevoi</h1>
-        <p>Data Science Programmer</p>
+    <header class="container">
+        <section class="hero">
+            <h1>Anton Polevoi</h1>
+            <p class="subtitle">Data Science Programmer focused on audio, speech, and practical AI tools.</p>
+        </section>
     </header>
 
     <nav>
-        <a href="blog.html">Blog</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
+        <div class="container nav-inner">
+            <a href="blog.html">Blog</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+        </div>
     </nav>
 
     <main class="container">
@@ -115,23 +185,23 @@
 
         <section class="section">
             <h2>Projects</h2>
-            <div class="project">
-                <h3><a href="project1.html">Sound Classification using Raspberry Pi 4</a></h3>
-                <p>Classify environmental sounds using AI and Raspberry Pi 4.</p>
-                <img src="src_img/raspberry.jpg" alt="Project 1">
-            </div>
+            <div class="project-list">
+                <div class="project">
+                    <h3><a href="project1.html">Sound Classification using Raspberry Pi 4</a></h3>
+                    <p>Classify environmental sounds using AI and Raspberry Pi 4.</p>
+                </div>
 
-            <div class="project">
-                <h3><a href="project2.html">Text-to-Speech System for Low-Resource Languages</a></h3>
-                <p>
-                    Developing speech models for low-resource languages to improve accessibility and inclusivity.
-                </p>
-                <img src="src_img/tts.png" alt="Project 2">
+                <div class="project">
+                    <h3><a href="project2.html">Text-to-Speech System for Low-Resource Languages</a></h3>
+                    <p>
+                        Developing speech models for low-resource languages to improve accessibility and inclusivity.
+                    </p>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer class="container">
         <p>Contact: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
         <p>Follow me on Twitter: <a href="https://twitter.com/yourtwitterhandle" target="_blank">@yourtwitterhandle</a></p>
     </footer>
