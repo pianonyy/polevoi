@@ -317,7 +317,7 @@
             border: 1px solid var(--border);
             border-radius: 10px;
             padding: 0.55rem 0.65rem;
-            font-size: 0.95rem;
+            font-size: 16px;
             background: #fff;
         }
 
@@ -343,8 +343,10 @@
         }
 
         .result-card strong {
-            font-size: 1.2rem;
+            display: block;
+            font-size: clamp(1rem, 2.8vw, 1.2rem);
             letter-spacing: -0.01em;
+            overflow-wrap: anywhere;
         }
 
         .result-highlight {
@@ -395,6 +397,36 @@
             .form-grid,
             .result-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: min(1100px, calc(100% - 1rem));
+            }
+
+            .topbar-inner {
+                justify-content: center;
+                gap: 0.6rem;
+            }
+
+            .topbar nav {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 1.25rem 0 0.9rem;
+            }
+
+            .hero-card,
+            .section {
+                padding: 1rem;
+            }
+
+            .cta-row .btn {
+                width: 100%;
+                text-align: center;
             }
         }
     </style>
@@ -523,8 +555,7 @@
         <section id="calculator" class="section">
             <h2>Калькулятор экономии на синхронистах</h2>
             <p class="lead">
-                Расчет повторяет модель из файла <code>costs.xlsx</code> и показывает разницу между классическим
-                синхронным переводом и AI.
+                Сравните стоимость классического синхронного перевода и AI при параметрах вашего мероприятия.
             </p>
             <div class="calculator">
                 <div class="form-grid">
@@ -572,7 +603,7 @@
                         <strong id="aiTotal">0 ₽</strong>
                     </div>
                     <div class="result-card">
-                        <span class="label">Разница</span>
+                        <span class="label">Экономия с AI</span>
                         <strong id="savingTotal">0 ₽</strong>
                     </div>
                 </div>
@@ -698,7 +729,8 @@
                 var syncTotal = syncHonor + syncEquipment;
                 var aiTotal = days * halls * aiRate;
                 var saving = syncTotal - aiTotal;
-                var savingPct = syncTotal > 0 ? (saving / syncTotal) * 100 : 0;
+                var savingPctFromAi = aiTotal > 0 ? (saving / aiTotal) * 100 : 0;
+                var ratioSyncToAi = aiTotal > 0 ? (syncTotal / aiTotal) : 0;
 
                 document.getElementById("syncTotal").textContent = rub(syncTotal);
                 document.getElementById("aiTotal").textContent = rub(aiTotal);
@@ -707,10 +739,10 @@
                 var hint = document.getElementById("savingHint");
                 if (saving >= 0) {
                     hint.className = "result-highlight positive";
-                    hint.textContent = "Экономия при выборе AI: " + savingPct.toFixed(1) + "%";
+                    hint.textContent = "Классический перевод дороже AI в " + ratioSyncToAi.toFixed(2) + " раза (+" + savingPctFromAi.toFixed(1) + "% от стоимости AI).";
                 } else {
                     hint.className = "result-highlight negative";
-                    hint.textContent = "При текущих параметрах AI дороже на " + Math.abs(savingPct).toFixed(1) + "%";
+                    hint.textContent = "При текущих параметрах AI дороже классического на " + Math.abs(savingPctFromAi).toFixed(1) + "%.";
                 }
             }
 
